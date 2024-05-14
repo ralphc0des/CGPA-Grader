@@ -1,307 +1,322 @@
 <!DOCTYPE html> 
-<html lang="en"> 
-
 <head> 
-	<meta charset="UTF-8"> 
-	<meta name="viewport" content= "width=device-width, 
-									initial-scale=1.0"> 
-	<title>CGPA Calculator</title> 
+    <meta charset="UTF-8"> 
+    <title>CGPA Calculator</title> 
 <style>
-    body { 
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-	background-color: #f0f0f0; 
-	margin: 20px; 
-	display: flex; 
-	align-items: center; 
-	justify-content: center; 
-	height: 100vh; 
+    body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #f0f0f0; 
+    margin: 20px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
 } 
 
 #calculator { 
-	background-color: #ffffff; 
-	padding: 25px; 
-	width: 500px; 
-	border-radius: 10px; 
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
-	text-align: center; 
+    background-color: #ffffff; 
+    padding: 25px; 
+    width: 500px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
 } 
 
-button { 
-	margin-top: 15px; 
-	padding: 12px 20px; 
-	background-color: #4caf50; 
-	color: #fff; 
-	border: none; 
-	border-radius: 5px; 
-	cursor: pointer; 
-	font-size: 14px; 
+button{ 
+    margin-top: 15px; 
+    padding: 12px 20px; 
+    background-image: linear-gradient(to top left, #39b385, #9be15d); 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 14px; 
+} 
+
+button.edit { 
+    margin-top: 15px; 
+    padding: 12px 20px; 
+    background-image: linear-gradient(to top left, #39b385, #9be15d); 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 14px; 
+} 
+button.delete { 
+    margin-top: 15px; 
+    padding: 12px 20px; 
+    background-image: linear-gradient(to top left, #e52a5a, #ff585f); 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 14px; 
 } 
 
 li { 
-	margin-bottom: 10px; 
-	list-style-type: none; 
+    margin-bottom: 10px; 
+    list-style-type: none; 
 } 
 
 input, 
 select { 
-	width: calc(100% - 15px); 
-	padding: 10px; 
-	margin-bottom: 15px; 
-	border: 1px solid #ccc; 
-	border-radius: 5px; 
-	box-sizing: border-box; 
-	font-size: 14px; 
+    width: calc(100% - 15px); 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+    font-size: 14px; 
 } 
 
 h2, 
 h3 { 
-	margin-bottom: 20px; 
-	color: #333; 
+    margin-bottom: 20px; 
+    background-image: linear-gradient(to top left, #39b385, #9be15d); 
 } 
 
 #cgpa { 
-	font-size: 24px; 
-	font-weight: bold; 
-	color: #4caf50; 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: linear-gradient(to top left, #39b385, #9be15d); 
 } 
 
 #subjectList { 
-	text-align: left; 
+    text-align: left; 
 } 
 
 button.edit, 
 button.delete { 
-	padding: 8px 15px; 
-	margin-left: 5px; 
-	font-size: 12px; 
-	cursor: pointer; 
+    padding: 8px 15px; 
+    margin-left: 5px; 
+    font-size: 12px; 
+    cursor: pointer; 
 } 
 
 button.delete { 
-	background-color: #d9534f; 
+    background-color: #d9534f; 
 } 
 
 .error { 
-	color: #d9534f; 
-	font-size: 16px; 
+    color: #d9534f; 
+    font-size: 16px; 
 
 } 
 
 table { 
-	width: 100%; 
-	border-collapse: collapse; 
-	margin-top: 20px; 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px; 
 } 
 
 th, 
 td { 
-	border: 1px solid #ddd; 
-	padding: 8px; 
-	text-align: left; 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left; 
 } 
 
 th { 
-	background-color: #f2f2f2; 
+    background-color: #f2f2f2; 
 }
 
 </style> 
 </head> 
 
 <body> 
-	<div id="calculator"> 
-		<span id="creditError" class="error"></span> 
-		<span id="inputError" class="error"></span> 
-		<br> 
-		<h2>ROK CGPA Calculator</h2> 
-		<form id="cgpaForm"> 
+    <div id="calculator"> 
+        <span id="creditError" class="error"></span> 
+        <span id="inputError" class="error"></span> 
+        <br> 
+        <h2>ROK CGPA Calculator</h2> 
+        <form id="cgpaForm"> 
 
-			<label for="subject">Course Code:</label> 
-			<input type="text" id="subject" required> 
+            <label for="subject">Course Code:</label> 
+            <input type="text" id="subject" required> 
 
-			<label for="grade">Grade:</label> 
-			<select id="grade"> 
-				<option value="S">S</option> 
-				<option value="A">A</option> 
-				<option value="B">B</option> 
-				<option value="C">C</option> 
-				<option value="D">D</option> 
-				<option value="F">F</option> 
-			</select> 
+            <label for="grade">Grade:</label> 
+            <select id="grade"> 
+                <option value="A">A</option> 
+                <option value="B">B</option> 
+                <option value="C">C</option> 
+                <option value="D">D</option> 
+                <option value="E">E</option> 
+                <option value="F">F</option> 
+            </select> 
 
-			<label for="credit">Credit:</label> 
-			<input type="number" id="credit" min="1" required> 
+            <label for="credit">Credit:</label> 
+            <input type="number" id="credit" min="1" required> 
 
-			<button type="button" onclick="addSubject()"> 
-				Add / Edit Course 
-			</button> 
-		</form> 
-		<h3>Calculate CGPA</h3> 
-		<table id="subjectTable"> 
-			<thead> 
-				<tr> 
-					<th>Course</th> 
-					<th>Grade</th> 
-					<th>Credit</th> 
-					<th>Action</th> 
-				</tr> 
-			</thead> 
-			<tbody id="subjectList"></tbody> 
-		</table> 
+            <button type="button" onclick="addSubject()"> 
+                Add / Edit Course 
+            </button> 
+        </form> 
+        <h3>Calculate CGPA</h3> 
+        <table id="subjectTable"> 
+            <thead> 
+                <tr> 
+                    <th>Course</th> 
+                    <th>Grade</th> 
+                    <th>Credit</th> 
+                    <th>Action</th> 
+                </tr> 
+            </thead> 
+            <tbody id="subjectList"></tbody> 
+        </table> 
 
-		<h3>CGPA: <span id="cgpa">0.00</span></h3> 
+        <h3>CGPA: <span id="cgpa">0.00</span></h3> 
 
-		<button type="button" onclick="calculateCGPA()"> 
-			Calculate CGPA 
-		</button> 
-		<button type="button" onclick="resetForm()"> 
-			Reset 
-		</button> 
-	</div> 
-	
+        <button type="button" onclick="calculateCGPA()"> 
+            Calculate CGPA 
+        </button> 
+        <button type="button" onclick="resetForm()"> 
+            Reset 
+        </button> 
+    </div> 
+    
 
-
-    <script>
-        let subjects = []; 
+    <script>
+        let subjects = []; 
 let editIndex = -1; 
 
 function addSubject() { 
-	const subjectInput = 
-		document.getElementById('subject'); 
-	const grade = 
-		document.getElementById('grade').value; 
-	const creditInput = 
-		document.getElementById('credit'); 
-	const credit = 
-		parseInt(creditInput.value); 
+    const subjectInput = 
+        document.getElementById('subject'); 
+    const grade = 
+        document.getElementById('grade').value; 
+    const creditInput = 
+        document.getElementById('credit'); 
+    const credit = 
+        parseInt(creditInput.value); 
 
-	// Validate credit input 
-	const inputError = 
-		document.getElementById('inputError') 
-	const creditError = 
-		document.getElementById('creditError'); 
-	if (!subjectInput.value || isNaN(credit)) { 
-		inputError.textContent = 
-			'Please fill out all fields.'; 
-		return; 
-	} 
-	else if (credit < 1 || credit > 20) { 
-		creditError.textContent = 
-			'Credit must be between 1 and 20'; 
-		return; 
-	} else { 
-		creditError.textContent = ''; 
-	} 
-	if (editIndex !== -1) { 
-		subjects[editIndex] = 
-		{ subject: subjectInput.value, grade, credit }; 
-		editIndex = -1; 
-	} else { 
-		subjects.push( 
-			{ subject: subjectInput.value, grade, credit }); 
-	} 
+    // Validate credit input 
+    const inputError = 
+        document.getElementById('inputError') 
+    const creditError = 
+        document.getElementById('creditError'); 
+    if (!subjectInput.value || isNaN(credit)) { 
+        inputError.textContent = 
+            'Please fill out all fields.'; 
+        return; 
+    } 
+    else if (credit < 1 || credit > 20) { 
+        creditError.textContent = 
+            'Credit must be between 1 and 20'; 
+        return; 
+    } else { 
+        creditError.textContent = ''; 
+    } 
+    if (editIndex !== -1) { 
+        subjects[editIndex] = 
+        { subject: subjectInput.value, grade, credit }; 
+        editIndex = -1; 
+    } else { 
+        subjects.push( 
+            { subject: subjectInput.value, grade, credit }); 
+    } 
 
-	displaySubjects(); 
-	clearForm(); 
+    displaySubjects(); 
+    clearForm(); 
 } 
 
 function displaySubjects() { 
-	const subjectList = 
-		document.getElementById('subjectList'); 
-	subjectList.innerHTML = ''; 
+    const subjectList = 
+        document.getElementById('subjectList'); 
+    subjectList.innerHTML = ''; 
 
-	subjects.forEach((s, index) => { 
-		const row = document.createElement('tr'); 
+    subjects.forEach((s, index) => { 
+        const row = document.createElement('tr'); 
 
-		const subjectCell = document.createElement('td'); 
-		subjectCell.textContent = s.subject; 
+        const subjectCell = document.createElement('td'); 
+        subjectCell.textContent = s.subject; 
 
-		const gradeCell = document.createElement('td'); 
-		gradeCell.textContent = s.grade; 
+        const gradeCell = document.createElement('td'); 
+        gradeCell.textContent = s.grade; 
 
-		const creditCell = document.createElement('td'); 
-		creditCell.textContent = s.credit; 
+        const creditCell = document.createElement('td'); 
+        creditCell.textContent = s.credit; 
 
-		const actionCell = document.createElement('td'); 
-		const editButton = document.createElement('button'); 
-		editButton.className = 'edit'; 
-		editButton.textContent = 'Edit'; 
-		editButton.onclick = () => editSubject(index); 
+        const actionCell = document.createElement('td'); 
+        const editButton = document.createElement('button'); 
+        editButton.className = 'edit'; 
+        editButton.textContent = 'Edit'; 
+        editButton.onclick = () => editSubject(index); 
 
-		const deleteButton = document.createElement('button'); 
-		deleteButton.className = 'delete'; 
-		deleteButton.textContent = 'Delete'; 
-		deleteButton.onclick = () => deleteSubject(index); 
+        const deleteButton = document.createElement('button'); 
+        deleteButton.className = 'delete'; 
+        deleteButton.textContent = 'Delete'; 
+        deleteButton.onclick = () => deleteSubject(index); 
 
-		actionCell.appendChild(editButton); 
-		actionCell.appendChild(deleteButton); 
+        actionCell.appendChild(editButton); 
+        actionCell.appendChild(deleteButton); 
 
-		row.appendChild(subjectCell); 
-		row.appendChild(gradeCell); 
-		row.appendChild(creditCell); 
-		row.appendChild(actionCell); 
+        row.appendChild(subjectCell); 
+        row.appendChild(gradeCell); 
+        row.appendChild(creditCell); 
+        row.appendChild(actionCell); 
 
-		subjectList.appendChild(row); 
-	}); 
+        subjectList.appendChild(row); 
+    }); 
 } 
 
 function editSubject(index) { 
-	const subjectInput = 
-		document.getElementById('subject'); 
-	const selectedSubject = subjects[index]; 
+    const subjectInput = 
+        document.getElementById('subject'); 
+    const selectedSubject = subjects[index]; 
 
-	subjectInput.value = selectedSubject.subject; 
-	document.getElementById('grade').value = 
-		selectedSubject.grade; 
-	document.getElementById('credit').value = 
-		selectedSubject.credit; 
+    subjectInput.value = selectedSubject.subject; 
+    document.getElementById('grade').value = 
+        selectedSubject.grade; 
+    document.getElementById('credit').value = 
+        selectedSubject.credit; 
 
-	editIndex = index; 
+    editIndex = index; 
 } 
 
 function deleteSubject(index) { 
-	subjects.splice(index, 1); 
-	displaySubjects(); 
+    subjects.splice(index, 1); 
+    displaySubjects(); 
 } 
 
 function calculateCGPA() { 
-	const totalCredits = subjects.reduce( 
-	(sum, s) => sum + s.credit, 0); 
-	const weightedSum = subjects.reduce( 
-	(sum, s) => sum + getGradePoint(s.grade) * s.credit, 0); 
+    const totalCredits = subjects.reduce( 
+    (sum, s) => sum + s.credit, 0); 
+    const weightedSum = subjects.reduce( 
+    (sum, s) => sum + getGradePoint(s.grade) * s.credit, 0); 
 
-	const cgpa = totalCredits === 0 ? 0 : 
-	(weightedSum / totalCredits).toFixed(2); 
-	document.getElementById('cgpa').textContent = cgpa; 
+    const cgpa = totalCredits === 0 ? 0 : 
+    (weightedSum / totalCredits).toFixed(2); 
+    document.getElementById('cgpa').textContent = cgpa; 
 } 
 
 function getGradePoint(grade) { 
-	// Assign grade points as per your grading system 
-	switch (grade) { 
-		case 'S': return 10.0; 
-		case 'A': return 9.0; 
-		case 'B': return 8.0; 
-		case 'C': return 7.0; 
-		case 'D': return 6.0; 
-		case 'F': return 0.0; 
-		default: return 0.0; 
-	} 
+    // Assign grade points as per your grading system 
+    switch (grade) { 
+        case 'A': return 5.0; 
+        case 'B': return 4.0; 
+        case 'C': return 3.0; 
+        case 'D': return 2.0; 
+        case 'E': return 1.0; 
+        case 'F': return 0.0; 
+        default: return 0.0; 
+    } 
 } 
 
 function clearForm() { 
-	document.getElementById('subject').value = ''; 
-	document.getElementById('grade').value = 'A'; 
-	document.getElementById('credit').value = ''; 
+    document.getElementById('subject').value = ''; 
+    document.getElementById('grade').value = 'A'; 
+    document.getElementById('credit').value = ''; 
 } 
 
 function resetForm() { 
-	subjects = []; 
-	editIndex = -1; 
-	document.getElementById('subjectList').innerHTML = ''; 
-	document.getElementById('cgpa').textContent = '0.00'; 
-	clearForm(); 
+    subjects = []; 
+    editIndex = -1; 
+    document.getElementById('subjectList').innerHTML = ''; 
+    document.getElementById('cgpa').textContent = '0.00'; 
+    clearForm(); 
 }
 
-    </script>
+    </script>
 
 </body> 
 
